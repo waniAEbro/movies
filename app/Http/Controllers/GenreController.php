@@ -6,7 +6,7 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Movie;
 
 class GenreController extends Controller
 {
@@ -34,7 +34,10 @@ class GenreController extends Controller
 
     public function show (Genre $genre) {
         return view("genre.show", [
-            "movies" => $genre->movies,
+            "movies" => Movie::select("movies.*")
+                ->join("genre_movie", "genre_movie.movie_id", "=", "movies.id")
+                ->where("genre_movie.genre_id", $genre->id)
+                ->paginate(10),
             "genre" => $genre
         ]);
     }
