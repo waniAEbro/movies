@@ -11,13 +11,15 @@ class MovieController extends Controller
 {
     public function index () {
         return view("movie.index", [
-            "movies" => Movie::paginate(10)
+            "movies" => Movie::get(),
+            "title" => "Movie"
         ]);
     }
 
     public function create () {
         return view("movie.create", [
-            "genres" => Genre::get()
+            "genres" => Genre::get(),
+            "title" => "Movie"
         ]);
     }
 
@@ -44,7 +46,8 @@ class MovieController extends Controller
     public function edit (Movie $movie) {
         return view("movie.edit", [
             "movie" => $movie,
-            "genres" => Genre::get()
+            "genres" => Genre::get(),
+            "title" => "Movie"
         ]);
     }
 

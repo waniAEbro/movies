@@ -1,46 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <title>Movie - Home</title>
-</head>
-<body>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-        <div class="container-xxl">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="/">Movie</a>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/movie">Movie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/genre">Genre</a>
-                    </li>
-                </ul>
+@extends('layouts.admin')
+
+@section('content')
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>{{$title}}</h3>
+                <p class="text-subtitle text-muted">Let's Change the Genre</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/genre">Genre</a></li>
+                        <li class="breadcrumb-item">Edit</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </nav>
-    <section class="container mt-4">
-        <h1 class="text-center">Create Genre</h1>
-        <form action="/genre/{{$genre->id}}" method="post">
-            @csrf
-            @method("put")
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama Genre :</label>
-                <input type="text" class="form-control @error("nama") is-invalid @enderror" value="{{$genre->nama}}" name="nama" id="nama" required>
+    </div>
+</div>
+
+<div class="page-content">
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Genre Form</h4>
             </div>
-            @error('nama')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <a href="/genre" class="btn btn-danger">Kembali</a>
-            <button class="btn btn-success" type="submit">Edit</button>
-        </form>
+            <div class="card-content">
+                <div class="card-body">
+                    <form class="form form-horizontal" method="post" action="/genre">
+                        @csrf
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="nama">Nama Genre :</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input type="text" class="form-control @error("nama") is-invalid @enderror" value="{{$genre->nama}}" name="nama" id="nama" placeholder="Nama Genre" required>
+                                </div>
+                                @error('nama')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-warning me-1 mb-1">Edit</button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
-</body>
-</html>
+</div>
+
+@endsection

@@ -12,12 +12,15 @@ class GenreController extends Controller
 {
     public function index () {
         return view("genre.index", [
-            "genres" => Genre::paginate(10)
+            "genres" => Genre::get(),
+            "title" => "Genre"
         ]);
     }
 
     public function create() {
-        return view("genre.create");
+        return view("genre.create", [
+            "title" => "Genre"
+        ]);
     }
 
     public function store(Request $request) {
@@ -37,14 +40,16 @@ class GenreController extends Controller
             "movies" => Movie::select("movies.*")
                 ->join("genre_movie", "genre_movie.movie_id", "=", "movies.id")
                 ->where("genre_movie.genre_id", $genre->id)
-                ->paginate(10),
-            "genre" => $genre
+                ->get(),
+            "genre" => $genre,
+            "title" => "Genre"
         ]);
     }
 
     public function edit (Genre $genre) {
         return view("genre.edit", [
-            "genre" => $genre
+            "genre" => $genre,
+            "title" => "Genre"
         ]);
     }
 
