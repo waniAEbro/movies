@@ -31,14 +31,7 @@ class MovieController extends Controller
             "produser" => $request->produser
         ]);
 
-        if ($request->genre != null) {
-            foreach($request->genre as $genre) {
-                DB::table("genre_movie")->insert([
-                    "movie_id" => $movie->id,
-                    "genre_id" => $genre
-                ]);
-            }
-        }
+        $movie->genres()->sync($request->genre);
         
         return redirect("/movie");
     }
@@ -52,8 +45,6 @@ class MovieController extends Controller
     }
 
     public function update (Request $request, Movie $movie) {
-        DB::table("genre_movie")->where("movie_id", $movie->id)->delete();
-
         $movie->update([
             "judul" => $request->judul,
             "tahun_rilis" => $request->tahun_rilis,
@@ -61,14 +52,7 @@ class MovieController extends Controller
             "produser" => $request->produser
         ]);
 
-        if ($request->genre != null) {
-            foreach($request->genre as $genre) {
-                DB::table("genre_movie")->insert([
-                    "movie_id" => $movie->id,
-                    "genre_id" => $genre
-                ]);
-            }
-        }
+        $movie->genres()->sync($request->genre);
 
         return redirect("/movie");
     }

@@ -9,5 +9,4 @@ class GenreMovie extends Model
 {
     use HasFactory;
     protected $table = ["genre_movie"];
-    protected $guarded = ["genre_id", "movie_id"];
 }
