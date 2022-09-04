@@ -32,7 +32,7 @@ class GenreController extends Controller
             "nama" => $request->nama
         ]);
 
-        return redirect("/");
+        return redirect("/genre");
     }
 
     public function show (Genre $genre) {
