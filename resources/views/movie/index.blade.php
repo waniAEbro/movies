@@ -47,13 +47,13 @@
                     <tbody>
                         @foreach ($movies as $number => $movie)
                         <tr>
-                            <th scope="row">{{$number + 1}}</th>
+                            <th>{{$number + 1}}</th>
                             <td>{{$movie->judul}}</td>
                             <td>{{$movie->rating}}</td>
                             <td>{{$movie->produser}}</td>
                             <td>
                                 @foreach ($movie->genres as $genre)
-                                    {{$genre->nama}},
+                                    <a href="/genre/{{$genre->id}}" class="badge bg-primary me-2">{{$genre->nama}}</a>
                                 @endforeach
                             </td>
                             <td class="d-flex">

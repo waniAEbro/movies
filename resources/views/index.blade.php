@@ -50,7 +50,7 @@
                             <td>{{$movie->produser}}</td>
                             <td>
                                 @foreach ($movie->genres as $genre)
-                                {{$genre->nama}},
+                                    <a href="/genre/{{$genre->id}}" class="badge bg-primary me-2">{{$genre->nama}}</a>
                                 @endforeach
                             </td>
                         </tr>
